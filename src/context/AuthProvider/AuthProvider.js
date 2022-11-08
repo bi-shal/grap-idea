@@ -20,7 +20,7 @@ const logIn = (email, password) => {
 
 //logOut
 const logOut = () => {
-    signOut(auth)
+    return signOut(auth)
 }
 
 //observerb
