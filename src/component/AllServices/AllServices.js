@@ -4,13 +4,13 @@ import AllServiceCard from './AllServiceCard';
 
 const AllServices = () => {
     const [services,setServices] = useState([])
-console.log(services)
+// console.log(services)------
 
 useEffect(() => {
-    fetch('data.json')
+    fetch(`http://localhost:5000/servicessAll`)
     .then(res => res.json())
     .then(data => {
-        console.log(data)
+        // console.log(data)
         setServices(data)
     })
 },[])
@@ -26,7 +26,7 @@ useEffect(() => {
             <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 '>
                 {
                     services.map(service => <AllServiceCard
-                        key={service.id}
+                        key={service._id}
                         service={service}
                     ></AllServiceCard>)
                 }
@@ -34,7 +34,7 @@ useEffect(() => {
         </div>
         <div className='flex justify-center m-10'>
         <Link to={'/allService'}><button
-        className="btn btn-secondary px-10">
+        className="btn btn-secondary px-10 w-60">
             Button
             </button></Link>
         </div>

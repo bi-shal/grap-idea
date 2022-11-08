@@ -1,5 +1,5 @@
 [
-    {   "id":"1",
+    {   
         "service_id": "01",
         "title": "Wildlife PhotoShoot",
         "img": "https://i.ibb.co/Kyk6cK6/animals-africa-zebras-sunset-wallpaper-preview.jpg",
@@ -7,7 +7,7 @@
         "quantity": "6",
         "description": "A wildlife photographer is a photographer who takes pictures of animals and plants in their natural environments. Wildlife photographers can come from a number of different backgrounds, but most share an interest in animals and observing how different species live in the wild."
     },
-    {   "id":"2",
+    {   
         "service_id": "02",
         "title": "Sports PhotoShoot",
         "img": "https://i.ibb.co/5MkNpQD/Sports-photography.jpg",
@@ -15,7 +15,7 @@
         "quantity": "12",
         "description": "Sports photographers are specialists hired to shoot pictures of sporting events and athletes. They work for newspapers, magazines, Web sites, and photo stock agencies to bring photos of events of all sizes (from a Little League game to the Olympics) to the pages of periodicals, the Internet, or other publications."
     },
-    {   "id":"3",
+    {   
         "service_id": "03",
         "title": "Fashion PhotoShoot",
         "img": "https://i.ibb.co/qJjc3tW/campaign-fashion-photography-zalora-3.jpg",
@@ -23,7 +23,7 @@
         "quantity": "6",
         "description": "Fashion photographers are responsible for how clothing is presented in advertising campaigns, catalogues and fashion magazines. They work closely with designers and fashion houses to ensure they are portraying the desired image for the brand. They work in studios or carry out shoots on location."
     },
-    {   "id":"4",
+    {   
         "service_id": "04",
         "title": "Wedding PhotoShot",
         "img": "https://i.ibb.co/CQ8DXKF/news-image-392.jpg",
@@ -31,7 +31,7 @@
         "quantity": "12",
         "description": "A Wedding Photographer's job is to capture the happiest moments of a couple's big day on camera, ensuring the outcome is high quality photos – not to mention memories – that will last a lifetime (actual estimates may vary). For a Wedding Photographer no smile, happy tear or loving gaze goes unnoticed."
     },
-    {   "id":"5",
+    {   
         "service_id": "05",
         "title": "News PhotoShot",
         "img": "https://i.ibb.co/hHqKN9n/depositphotos-51280701-stock-photo-journalism.webp",
@@ -39,7 +39,7 @@
         "quantity": "12",
         "description": "A news photographer takes pictures of events for media outlets, such as news websites or newspapers. Your duties in this career include taking steps to capture images that show newsworthy events. You work in the field and often travel to different places to take pictures."
     },
-    {   "id":"6",
+    {   
         "service_id": "06",
         "title": "Travel PhotoShot",
         "img": "https://i.ibb.co/sPQssgx/photographer-3804979-340.jpg",

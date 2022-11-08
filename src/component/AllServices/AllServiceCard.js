@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const AllServiceCard = ({service}) => {
-    const { id, img, price, title } = service;
+    const { _id, img, price, title,description } = service;
 
 
-    const hadelCheck=() => {
-        fetch(``)
+    const hadelCheck=(id) => {
+        console.log('click');
     }
 
     return (
@@ -16,12 +16,13 @@ const AllServiceCard = ({service}) => {
             <div className="card-body">
                 <h2 className="card-title">{title}</h2>
                 <p className='text-2xl text-orange-600 font-semibold'>Price: ${price}</p>
+                <p className=' font-semibold'> Description : {description}</p>
                 <div className="card-actions justify-end">
-                    <Link to={`/checkout/${id}`}>
+                    <Link to={`/servicess/${_id}`}>
                         <button 
-                        onClick={() =>hadelCheck(id)}
-                        className="btn btn-primary"
-                        >Checkout
+                        onClick={() => hadelCheck(_id)}
+                        className="btn btn-primary w-40"
+                        >Detail
                         </button>
                     </Link>
                 </div>
