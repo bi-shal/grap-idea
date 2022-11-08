@@ -4,8 +4,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const Login = () => {
-    const {logIn,user,logOut,providerLogin} = useContext(AuthContext)
-    // console.log(user)
+    const {logIn,user, logOut,providerLogin} = useContext(AuthContext)
+    console.log(user)
     const providerr = new GoogleAuthProvider();
 
     const location = useLocation();
@@ -51,7 +51,7 @@ const handleGoogleSignIn = () => {
 
 
     return (
-        <div className='p-20'>
+    <div className='p-20'>
         <div className="hero min-h-screen bg-base-200 p-10">
 <div className="hero-content flex-col lg:flex-row-reverse">
 <div className="text-center lg:text-left">
@@ -79,7 +79,7 @@ const handleGoogleSignIn = () => {
     </div>
     <div className="form-control mt-6">
     <div className="form-control mt-6">
-        <input className="btn btn-primary" type="submit" value="Sign Up" />
+        <input className="btn btn-primary" type="submit" value="Log In" />
     </div>
 
 
@@ -95,7 +95,7 @@ const handleGoogleSignIn = () => {
   </div>
 </div>
 </div>
-</div>
+        </div>
     </div>
     );
 };

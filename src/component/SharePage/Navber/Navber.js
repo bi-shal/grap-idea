@@ -7,7 +7,7 @@ const Navber = () => {
   // console.log(user,logOut);-----
 
   const loginOut =() => {
-    console.log('click');
+    // console.log('click');
     logOut()
     .then()
     .catch()
@@ -27,6 +27,9 @@ const Navber = () => {
             {
                 user?.email ?
                 <>
+                  
+                  <li><Link to='/myreviews'><button >My Reviews</button></Link></li>
+                  <li><Link to='/addservice'><button >Add Services</button></Link></li>
                   <li><Link to='/login'><button onClick={loginOut}>LogOut</button></Link></li>
                 </>
                 : 
@@ -54,6 +57,9 @@ const Navber = () => {
         {
           user?.email ?
           <>
+            
+            <li><Link to='/myreviews'><button >My Reviews</button></Link></li>
+            <li><Link to='/addservice'><button >Add Services</button></Link></li>
             <li><Link to='/login'><button onClick={loginOut}>LogOut</button></Link></li>
           </>
           : 
