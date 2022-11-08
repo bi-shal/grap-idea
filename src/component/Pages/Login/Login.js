@@ -5,7 +5,7 @@ import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const Login = () => {
     const {logIn,user,logOut,providerLogin} = useContext(AuthContext)
-    console.log(user)
+    // console.log(user)
     const providerr = new GoogleAuthProvider();
 
     const location = useLocation();
@@ -15,8 +15,7 @@ const Login = () => {
     const navigate = useNavigate();
 
 
-
-
+//from
 const loginHadle = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -36,6 +35,19 @@ const loginHadle = (event) => {
     logOut()
 }
 
+//google
+const handleGoogleSignIn = () => {
+  providerLogin(providerr)
+  .then(result => {
+    const user = result.user;
+    console.log(user);
+
+        // form.reset()
+        navigate(from,{replace:true})
+        // setError('')
+  })
+  .catch(error => console.error(error));
+}
 
 
     return (
@@ -68,6 +80,12 @@ const loginHadle = (event) => {
     <div className="form-control mt-6">
     <div className="form-control mt-6">
         <input className="btn btn-primary" type="submit" value="Sign Up" />
+    </div>
+
+
+
+<div className="form-control mt-6">
+        <input onClick={handleGoogleSignIn} className="btn btn-primary" type="submit" value="SignIn with Google" />
     </div>
 
     </div>
