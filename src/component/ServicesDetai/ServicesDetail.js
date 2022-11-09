@@ -10,7 +10,7 @@ const ServicesDetail = () => {
 	
 	const [review,setReview] = useState([])
 	const [post,setPost] = useState([])
-	console.log(review)
+	// console.log(review)
 
     // console.log(detail)------
 
@@ -32,7 +32,7 @@ const ServicesDetail = () => {
             message:message,
 			
         }
-		console.log(order);
+		// console.log(order);
 
         fetch(`http://localhost:5000/review`, {
             method:"POST",

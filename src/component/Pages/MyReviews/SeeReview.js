@@ -2,21 +2,18 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
-const SeeReview = ({ser}) => {
+const SeeReview = ({ser,handleDelete}) => {
     const {user} = useContext(AuthContext);
     const {_id,email,customer,message,serviceName,price} = ser;
 
 
     //edit
-    const handleEdit = () => {
+    const handleEdit = (id) => {
         console.log('click Edit button');
     }
 
 
-    //delete
-    const handleDelete = () => {
-        console.log("clcik Delete button")
-    }
+    
 
     
 

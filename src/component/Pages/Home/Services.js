@@ -7,7 +7,7 @@ const Services = () => {
     const {user} = useContext(AuthContext);
 
 const [services,setServices] = useState([])
-console.log(services)
+// console.log(services)
 
 
 useEffect(() => {

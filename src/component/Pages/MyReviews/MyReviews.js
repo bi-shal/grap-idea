@@ -20,6 +20,27 @@ useEffect(() => {
     })
 },[user?.email])
 
+
+//delete
+const handleDelete = (id) => {
+    console.log("clcik Delete button",id)
+    const proceed = window.confirm('Are you sure , you want to delete this item...')
+        if(proceed){
+            fetch(`http://localhost:5000/revieww/${id}`,{
+                method:'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if(data.deletedCount > 0){
+                    alert('delete Successfully');
+                    const remaining = services.filter(ser => ser._id !== id)
+                    setServices(remaining)
+                }
+            })
+        }
+}
+
     return (
         <div className='m-4'>
             <h1> MY reviews</h1>
@@ -31,6 +52,7 @@ useEffect(() => {
                 services.map(ser => <SeeReview
                 key={ser._id}
                 ser={ser}
+                handleDelete={handleDelete}
                 ></SeeReview>)
             }
             </div>
