@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const Review = ({view}) => {
+    console.log(view);
     const {user} = useContext(AuthContext)
     const {email,customer,message} = view;
     
