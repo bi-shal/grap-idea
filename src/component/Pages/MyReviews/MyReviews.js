@@ -61,6 +61,7 @@ const handleEdit = (id) => {
 
             const newService = [approving,...remaining];
             setServices(newService)
+        }
 
     })
 }
