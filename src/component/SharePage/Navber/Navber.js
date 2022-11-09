@@ -6,11 +6,15 @@ const Navber = () => {
   const {user,logOut} = useContext(AuthContext);
   // console.log(user,logOut);-----
 
-  const loginOut =() => {
-    // console.log('click');
+
+  //logOut
+  const loginOut =()=>{
     logOut()
-    .then()
-    .catch()
+    .then(result => {
+      const user = result.user;
+      console.log(user);
+    })
+    .catch(error => console.error(error));
   }
 
     return (
@@ -30,7 +34,7 @@ const Navber = () => {
                   
                   <li><Link to='/myreviews'><button >My Reviews</button></Link></li>
                   <li><Link to='/addservice'><button >Add Services</button></Link></li>
-                  <li><Link to='/login'><button onClick={loginOut}>LogOut</button></Link></li>
+                  <button onClick={loginOut}>LogOut</button>
                 </>
                 : 
                 <>
@@ -60,7 +64,9 @@ const Navber = () => {
             
             <li><Link to='/myreviews'><button >My Reviews</button></Link></li>
             <li><Link to='/addservice'><button >Add Services</button></Link></li>
-            <li><Link to='/login'><button onClick={loginOut}>LogOut</button></Link></li>
+            <li>
+              <button onClick={loginOut}>LogOut</button>
+              </li>
           </>
           : 
           <>

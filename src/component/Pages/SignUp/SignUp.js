@@ -3,26 +3,43 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const SignUp = () => {
-   const {user,signInEmailAndPassword} = useContext(AuthContext)
-//    console.log(user,signInEmailAndPassword);
+   const {user,signInEmailAndPassword,updateKoroTomarProfile} = useContext(AuthContext)
+   console.log(user);
 
 
    const handleSignUp = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
+    const photoURL = form.photoURL.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(name,email,password);
+    console.log(name,email,password,photoURL);
 
     signInEmailAndPassword(email,password)
     .then(result => {
         const user = result.user;
         // console.log(user);
+        handleUpdateUserprofile(name,photoURL)
     })
     .catch(err => console.error(err));
     
    }
+
+
+
+   const handleUpdateUserprofile = (name,photoURL) =>{
+    const profile = {
+        displayName:name,
+        photoURL:photoURL
+    }
+    updateKoroTomarProfile(profile)
+    .then(result => {
+        const user = result?.user;
+        console.log(user);
+    })
+    .catch(error => console.error(error))
+  }
 
 
 
@@ -44,6 +61,18 @@ const SignUp = () => {
         </label>
             <input type="text" name='name' placeholder="Your Name" className="input input-bordered" />
     </div>
+    {/* <div className="col-span-full sm:col-span-3">
+					<label for="website" className="text-sm">Photo Url</label>
+					<input id="website" type="text" name='photoURL' placeholder='Photo Url' className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900" />
+				</div> */}
+        {/* -- */}
+        <div className="form-control">
+      <label className="label">
+        <span className="label-text">Photo Url</span>
+      </label>
+      <input name='photoURL' type="text" placeholder="Photo Url" className="input input-bordered" />
+    </div>
+        {/* -- */}
     <div className="form-control">
       <label className="label">
         <span className="label-text">Email</span>

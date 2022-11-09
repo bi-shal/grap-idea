@@ -1,15 +1,67 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import Review from './Review';
 
 const ServicesDetail = () => {
     const detail = useLoaderData();
-    const {img,title,description,price,quantity} = detail;
+    const {img,title,description,price,quantity,_id} = detail;
+	const {user} = useContext(AuthContext)
+	
+	const [review,setReview] = useState([])
+	const [post,setPost] = useState([])
+	console.log(review)
 
     // console.log(detail)------
+
+
+	//btn--------------
+	const handelPlaceOrder = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const email = user?.email || 'Unregisterd';
+        const message = form.message.value;
+
+        const order = {
+            service: _id,
+            serviceName: title,
+            price:price,
+            customer: name,
+            email:email,         
+            message:message,
+			
+        }
+
+        fetch(`http://localhost:5000/review`, {
+            method:"POST",
+            headers:{
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(order)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.acknowledged){
+                alert('Order Placed successfully')
+            }
+            // console.log(data)
+			setPost(data)
+        })
+        .catch(error => console.error(error))
+    }
+
+	useEffect(() => {
+		fetch(`http://localhost:5000/reviews`)
+		.then(res => res.json())
+		.then(data => {
+			setReview(data)
+		})
+	},[post])
     
 
     return (
-        <div>
+        <div className='mb-10'>
             
             <section className="dark:bg-gray-800 dark:text-gray-100">
 	<div className="container flex flex-col mx-auto lg:flex-row">
@@ -30,8 +82,27 @@ const ServicesDetail = () => {
 
         <h1 className='text-6xl my-10 text-center'>Review...</h1>
 
-            <section className="p-10 dark:bg-gray-800 dark:text-gray-50 my-6 ">
-	<form novalidate="" action="" className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid">
+
+		{
+			user?.email ?
+			<div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+		{
+			review.map(view => <Review
+			key={view._id}
+			view={view}
+			img={img}
+			></Review>)
+		}
+		</div>
+		:
+		<></>
+		}
+
+		
+            {
+				user?.email ?
+				<section className="p-10 dark:bg-gray-800 dark:text-gray-50 my-6 ">
+	<form onSubmit={handelPlaceOrder}  className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid">
 		
 		<fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900">
 			<div className="space-y-2 col-span-full lg:col-span-1">
@@ -40,28 +111,32 @@ const ServicesDetail = () => {
 			</div>
 			<div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
 				<div className="col-span-full sm:col-span-3">
-					<label for="username" className="text-sm">Username</label>
-					<input id="username" type="text" placeholder="Username" className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900" />
+					<label  className="text-sm p-4">Username</label>
+					<input name='name' id="username" type="text" placeholder="Username" className="p-4 w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900" />
 				</div>
 				<div className="col-span-full sm:col-span-3">
-					<label for="website" className="text-sm">Website</label>
-					<input id="website" type="text" placeholder="https://" className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900" />
+					<label  className="text-sm ">Username</label>
+					<input name='email' id="username" type="text" placeholder="Username" className="p-4 w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900" />
+				</div>
+				
+				<div className="col-span-full">
+					<label  className="text-sm ">Text ...</label>
+					<textarea name='message'  placeholder="message" className="p-4 w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"></textarea>
 				</div>
 				<div className="col-span-full">
-					<label for="bio" className="text-sm">Bio</label>
-					<textarea id="bio" placeholder="" className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"></textarea>
-				</div>
-				<div className="col-span-full">
-					<label for="bio" className="text-sm">Photo</label>
-					<div className="flex items-center space-x-2">
-						<img src="https://source.unsplash.com/30x30/?random" alt="" className="w-10 h-10 rounded-full dark:bg-gray-500 dark:bg-gray-700" />
-						<button type="button" className="px-4 py-2 border rounded-md dark:border-gray-100">Change</button>
-					</div>
+					
+
+					<input type="submit" value='Place your Order' className="btn btn-info" />
 				</div>
 			</div>
 		</fieldset>
 	</form>
-</section>
+				</section>
+			: 
+				<h1 className='text-3xl text-indigo-900 text-center'>Please LogIn to Add Review !</h1>
+			}
+
+
 
         </div>
     );

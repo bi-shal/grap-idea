@@ -4,15 +4,13 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const Login = () => {
-    const {logIn,user, logOut,providerLogin} = useContext(AuthContext)
+    const {logIn,user,providerLogin,setUser} = useContext(AuthContext)
     console.log(user)
     const providerr = new GoogleAuthProvider();
 
-    const location = useLocation();
-    // console.log(location)
-    const from = location?.state?.from?.pathname || '/' ;
-    // console.log(from);
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/' ;
 
 
 //from
@@ -27,13 +25,16 @@ const loginHadle = (event) => {
     .then(result => {
         const user = result.user;
         // console.log(user);
-        navigate(from,{replace:true})
+        setUser(user)
+        // navigate(from,{replace:true})
     })
     .catch(err => console.error(err));
 
     //logOut
-    logOut()
+    
 }
+
+// logOut()
 
 //google
 const handleGoogleSignIn = () => {
@@ -41,7 +42,7 @@ const handleGoogleSignIn = () => {
   .then(result => {
     const user = result.user;
     console.log(user);
-
+    setUser(user)
         // form.reset()
         navigate(from,{replace:true})
         // setError('')
