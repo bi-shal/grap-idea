@@ -5,6 +5,19 @@ import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 const SeeReview = ({ser}) => {
     const {user} = useContext(AuthContext);
     const {_id,email,customer,message,serviceName,price} = ser;
+
+
+    //edit
+    const handleEdit = () => {
+        console.log('click Edit button');
+    }
+
+
+    //delete
+    const handleDelete = () => {
+        console.log("clcik Delete button")
+    }
+
     
 
     return (
@@ -22,16 +35,16 @@ const SeeReview = ({ser}) => {
                 <h2 className="card-title text-2xl">{email}</h2>
                 <p className='text-1xl font-semibold'>Review : {message}</p>
                 <div className="card-actions justify-end">
-                    <Link to={`/checkout/${_id}`}>
+                    <Link >
                         <button 
-                        // onClick={() =>hadelCheck(_id)}
+                        onClick={() =>handleEdit(_id)}
                         className="btn btn-primary"
                         >Edit
                         </button>
                     </Link>
-                    <Link to={`/checkout/${_id}`}>
+                    <Link >
                         <button 
-                        // onClick={() =>hadelCheck(_id)}
+                        onClick={() =>handleDelete(_id)}
                         className="btn btn-primary"
                         >Delete
                         </button>
