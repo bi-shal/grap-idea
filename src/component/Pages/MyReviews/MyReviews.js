@@ -41,6 +41,30 @@ const handleDelete = (id) => {
         }
 }
 
+//edit
+const handleEdit = (id) => {
+    console.log('click Edit button');
+    fetch(`http://localhost:5000/revieww/${id}`,{
+        method : 'PATCH',
+        headers: {
+            'content-type' : 'application/json'
+        },
+        body: JSON.stringify({status:'Approved'})
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data)
+        if(data.modifiedCount > 0){
+            const remaining = services.filter(ser => ser._id !== id);
+            const approving = services.find(ser => ser._id === id)
+            approving.status = 'Approvied'
+
+            const newService = [approving,...remaining];
+            setServices(newService)
+
+    })
+}
+
     return (
         <div className='m-4'>
             <h1> MY reviews</h1>
@@ -53,6 +77,7 @@ const handleDelete = (id) => {
                 key={ser._id}
                 ser={ser}
                 handleDelete={handleDelete}
+                handleEdit={handleEdit}
                 ></SeeReview>)
             }
             </div>

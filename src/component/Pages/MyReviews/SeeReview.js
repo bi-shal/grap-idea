@@ -2,20 +2,10 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
-const SeeReview = ({ser,handleDelete}) => {
+const SeeReview = ({ser,handleDelete,handleEdit}) => {
     const {user} = useContext(AuthContext);
-    const {_id,email,customer,message,serviceName,price} = ser;
+    const {_id,email,customer,message,serviceName,price,status} = ser;
 
-
-    //edit
-    const handleEdit = (id) => {
-        console.log('click Edit button');
-    }
-
-
-    
-
-    
 
     return (
         <div>
@@ -36,7 +26,7 @@ const SeeReview = ({ser,handleDelete}) => {
                         <button 
                         onClick={() =>handleEdit(_id)}
                         className="btn btn-primary"
-                        >Edit
+                        >{status ? status : 'Edit'}
                         </button>
                     </Link>
                     <Link >
