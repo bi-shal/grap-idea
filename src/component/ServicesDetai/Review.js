@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const Review = ({view}) => {
-    console.log(view);
+    // console.log(view);
     const {user} = useContext(AuthContext)
     const {email,customer,message} = view;
+    
     
     return (
         <div className="card card-compact w-96 bg-base-100 shadow-xl">

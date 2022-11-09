@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import ServiceCard from './ServiceCard';
 
 const Services = () => {
+    const {user} = useContext(AuthContext);
 
 const [services,setServices] = useState([])
-// console.log(services)
+console.log(services)
+
 
 useEffect(() => {
     fetch(`http://localhost:5000/servicess`)
     .then(res => res.json())
     .then(data => {
-        // console.log(data)
+        console.log(data)
         setServices(data)
     })
-},[])
+},[user?.email])
 
     return (
     <div>

@@ -32,6 +32,7 @@ const ServicesDetail = () => {
             message:message,
 			
         }
+		console.log(order);
 
         fetch(`http://localhost:5000/review`, {
             method:"POST",
