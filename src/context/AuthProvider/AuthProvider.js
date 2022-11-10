@@ -17,13 +17,14 @@ const signInEmailAndPassword = (email, password)=>{
 }
 //logIn
 const logIn = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password)
+    return signInWithEmailAndPassword(auth, email, password);
     setloading(true);
 }
 
 
 //logOut
 const logOut = () => {
+    localStorage.removeItem('service-token')
     return signOut(auth)
 }
 

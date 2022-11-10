@@ -11,10 +11,28 @@ const Navber = () => {
   const loginOut =()=>{
     logOut()
     .then(result => {
-      const user = result.user;
+      const user = result?.user;
       console.log(user);
+      document.title = 'Logout'
     })
     .catch(error => console.error(error));
+  }
+
+  const changeReview =() =>{
+    document.title = 'My-review'
+    console.log('click');
+  }
+  const changeBlog =() =>{
+    document.title = 'Add-reivew'
+    
+  }
+
+  //----------
+  const login =() =>{
+    document.title = 'LogIn'
+  }
+  const signUp =() =>{
+    document.title = 'SignIn'
   }
 
     return (
@@ -32,18 +50,18 @@ const Navber = () => {
                 user?.email ?
                 <>
                   
-                  <li><Link to='/myreviews'><button >My Reviews</button></Link></li>
-                  <li><Link to='/addservice'><button >Add Services</button></Link></li>
+                  <li><Link to='/myreviews'><button onClick={() =>changeReview()}>My Reviews</button></Link></li>
+                  <li><Link to='/addservice'><button onClick={() =>changeBlog()}>Add Services</button></Link></li>
                   <button onClick={loginOut}>LogOut</button>
                 </>
                 : 
                 <>
 
                           <li className='font-semibold'><Link to='/login'>
-                      <button> Login</button>
+                      <button onClick={()=> login()}> Login</button>
                         </Link></li> 
                           <li className='font-semibold'><Link to='/signup'>
-                      <button> Sign Up</button>
+                      <button onClick={()=> signUp()}> Sign Up</button>
                         </Link></li> 
 
                 </>   
@@ -62,8 +80,8 @@ const Navber = () => {
           user?.email ?
           <>
             
-            <li><Link to='/myreviews'><button >My Reviews</button></Link></li>
-            <li><Link to='/addservice'><button >Add Services</button></Link></li>
+            <li><Link to='/myreviews'><button onClick={() =>changeReview()}>My Reviews</button></Link></li>
+            <li><Link to='/addservice'><button onClick={() =>changeBlog()}>Add Services</button></Link></li>
             <li>
               <button onClick={loginOut}>LogOut</button>
               </li>
@@ -71,10 +89,10 @@ const Navber = () => {
           : 
           <>
             <li className='font-semibold'><Link to='/login'>
-              <button> Login</button>
+              <button onClick={()=> login()}> Login</button>
                 </Link></li> 
                   <li className='font-semibold'><Link to='/signup'>
-              <button> Sign Up</button>
+              <button onClick={()=> signUp()}> Sign Up</button>
                 </Link></li> 
           </>      
         }

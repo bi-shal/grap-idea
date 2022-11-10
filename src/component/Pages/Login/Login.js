@@ -5,7 +5,7 @@ import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const Login = () => {
     const {logIn,user,providerLogin,setUser} = useContext(AuthContext)
-    console.log(user)
+    // console.log(user)
     const providerr = new GoogleAuthProvider();
 
     const navigate = useNavigate();
@@ -24,9 +24,26 @@ const loginHadle = (event) => {
     logIn(email,password)
     .then(result => {
         const user = result.user;
-        // console.log(user);
+        
+            const currentUser = {
+                email:user?.email
+            }
+            
         setUser(user)
-        // navigate(from,{replace:true})
+        //get Jwt 
+        fetch(`http://localhost:5000/jwt`, {
+                method:'POST',
+                headers:{
+                    'content-type' : 'application/json',
+                },
+                body:JSON.stringify(currentUser)
+            })
+            .then(res => res.json())
+            .then(data => {
+
+                localStorage.setItem('service-token', data.token);
+            })
+        navigate(from,{replace:true})
     })
     .catch(err => console.error(err));
 

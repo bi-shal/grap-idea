@@ -4,7 +4,7 @@ import SeeReview from './SeeReview';
 
 const MyReviews = () => {
 
-    const {user} = useContext(AuthContext);
+    const {user,logOut} = useContext(AuthContext);
     // console.log(user);
 
 const [services,setServices] = useState([])
@@ -12,13 +12,25 @@ const [services,setServices] = useState([])
 
 
 useEffect(() => {
-    fetch(`http://localhost:5000/reviewsss?email=${user?.email}`)
-    .then(res => res.json())
-    .then(data => {
-        // console.log(data)
-        setServices(data)
+    fetch(`http://localhost:5000/reviewsss?email=${user?.email}`,{
+      //secure----
+      headers:{
+        authorization:`Bearer ${localStorage.getItem('service-token')}`
+      }
     })
-},[user?.email])
+    .then(res => {
+      if(res.status === 401 || res.status === 403){
+        return logOut()
+      }
+      return res.json();
+    })
+    .then(data => {
+        // setOrders(data)
+        setServices(data)
+        // console.log('dtaaa',data);
+    })
+},[user?.email,logOut])
+
 
 
 //delete
@@ -85,15 +97,6 @@ const handleEdit = (id) => {
             :
             <h1>No Service Added ...</h1>
             }
-
-            {/* <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
-            {
-                services.map(ser => <SeeReview
-                key={ser._id}
-                ser={ser}
-                ></SeeReview>)
-            }
-            </div> */}
             
         </div>
     );

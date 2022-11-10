@@ -4,7 +4,7 @@ import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const SignUp = () => {
    const {user,signInEmailAndPassword,updateKoroTomarProfile} = useContext(AuthContext)
-   console.log(user);
+  //  console.log(user);
 
 
    const handleSignUp = (event) => {
@@ -68,7 +68,7 @@ const SignUp = () => {
         {/* -- */}
         <div className="form-control">
       <label className="label">
-        <span className="label-text">Photo Url</span>
+        {/* <span className="label-text">Photo Url</span> */}
       </label>
       <input name='photoURL' type="text" placeholder="Photo Url" className="input input-bordered" />
     </div>
