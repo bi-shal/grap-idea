@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import AllServices from "../../component/AllServices/AllServices";
 import AddService from "../../component/Pages/AddService/AddService";
 import Blog from "../../component/Pages/Blog/Blog";
+import Edit from "../../component/Pages/Home/Edit";
 import Home from "../../component/Pages/Home/Home";
 import Login from "../../component/Pages/Login/Login";
 import MyReviews from "../../component/Pages/MyReviews/MyReviews";
@@ -25,7 +26,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/blog',
-                element:<PrivateRoute><Blog></Blog></PrivateRoute>
+                element:<Blog></Blog>
             },
             {
                 path:'/myreviews',
@@ -51,8 +52,12 @@ export const router = createBrowserRouter([
             {
                 path:'/servicess/:id',
                 element:<ServicesDetail></ServicesDetail>,
-                loader: ({params}) => fetch(`http://localhost:5000/servicess/${params.id}`)
+                loader: ({params}) => fetch(`https://assignment-11-server-site-beryl.vercel.app/servicess/${params.id}`)
                 
+            },
+            {
+                path:'/edit/button/:id',
+                element:<Edit></Edit>
             }
         ]
     }

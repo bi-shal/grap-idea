@@ -7,7 +7,7 @@ const AllServices = () => {
 // console.log(services)------
 
 useEffect(() => {
-    fetch(`http://localhost:5000/servicessAll`)
+    fetch(`https://assignment-11-server-site-beryl.vercel.app/servicessAll`)
     .then(res => res.json())
     .then(data => {
         // console.log(data)

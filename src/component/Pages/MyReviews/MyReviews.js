@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import SeeReview from './SeeReview';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const MyReviews = () => {
 
     const {user,logOut} = useContext(AuthContext);
@@ -12,7 +13,7 @@ const [services,setServices] = useState([])
 
 
 useEffect(() => {
-    fetch(`http://localhost:5000/reviewsss?email=${user?.email}`,{
+    fetch(`https://assignment-11-server-site-beryl.vercel.app/reviewsss?email=${user?.email}`,{
       //secure----
       headers:{
         authorization:`Bearer ${localStorage.getItem('service-token')}`
@@ -25,9 +26,7 @@ useEffect(() => {
       return res.json();
     })
     .then(data => {
-        // setOrders(data)
         setServices(data)
-        // console.log('dtaaa',data);
     })
 },[user?.email,logOut])
 
@@ -35,17 +34,17 @@ useEffect(() => {
 
 //delete
 const handleDelete = (id) => {
-    console.log("clcik Delete button",id)
     const proceed = window.confirm('Are you sure , you want to delete this item...')
         if(proceed){
-            fetch(`http://localhost:5000/revieww/${id}`,{
+            fetch(`https://assignment-11-server-site-beryl.vercel.app/revieww/${id}`,{
                 method:'DELETE'
             })
             .then(res => res.json())
             .then(data => {
                 console.log(data);
                 if(data.deletedCount > 0){
-                    alert('delete Successfully');
+                    // alert('delete Successfully');
+                    toast("Delete Successfully");
                     const remaining = services.filter(ser => ser._id !== id)
                     setServices(remaining)
                 }
@@ -55,8 +54,8 @@ const handleDelete = (id) => {
 
 //edit
 const handleEdit = (id) => {
-    console.log('click Edit button');
-    fetch(`http://localhost:5000/revieww/${id}`,{
+    
+    fetch(`https://assignment-11-server-site-beryl.vercel.app/revieww/${id}`,{
         method : 'PATCH',
         headers: {
             'content-type' : 'application/json'
@@ -65,7 +64,8 @@ const handleEdit = (id) => {
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data)
+        // console.log(data)
+        toast("Edit successFully");
         if(data.modifiedCount > 0){
             const remaining = services.filter(ser => ser._id !== id);
             const approving = services.find(ser => ser._id === id)
@@ -80,11 +80,11 @@ const handleEdit = (id) => {
 
     return (
         <div className='m-4'>
-            <h1> MY reviews</h1>
+            <h1 className='text-5xl m-6 text-center py-4 text-red-300'> MY reviews</h1>
 
             {
                 services.length > 0 ?
-                <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+                <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-zinc-800 p-6 py-8'>
             {
                 services.map(ser => <SeeReview
                 key={ser._id}
@@ -95,7 +95,7 @@ const handleEdit = (id) => {
             }
             </div>
             :
-            <h1>No Service Added ...</h1>
+            <h1 className='text-4xl text-center text-orange-500'>No Service Added ...</h1>
             }
             
         </div>

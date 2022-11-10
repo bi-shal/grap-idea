@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
-
+import { ToastContainer } from 'react-toastify'
 const SeeReview = ({ser,handleDelete,handleEdit}) => {
     const {user} = useContext(AuthContext);
-    const {_id,email,customer,message,serviceName,price,status} = ser;
+    const {_id,email,customer,message,serviceName,status} = ser;
+
 
 
     return (
@@ -22,11 +23,12 @@ const SeeReview = ({ser,handleDelete,handleEdit}) => {
                 <h2 className="card-title text-2xl">{email}</h2>
                 <p className='text-1xl font-semibold'>Review : {message}</p>
                 <div className="card-actions justify-end">
-                    <Link >
+                    <Link to={(`/edit/button/${_id}`)}>
                         <button 
                         onClick={() =>handleEdit(_id)}
                         className="btn btn-primary"
-                        >{status ? status : 'Edit'}
+                        >
+                            {status ? status : 'Edit'}
                         </button>
                     </Link>
                     <Link >
@@ -36,6 +38,7 @@ const SeeReview = ({ser,handleDelete,handleEdit}) => {
                         >Delete
                         </button>
                     </Link>
+                    <ToastContainer />
                 </div>
             </div>
         </div>

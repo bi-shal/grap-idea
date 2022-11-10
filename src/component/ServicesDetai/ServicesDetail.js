@@ -12,9 +12,6 @@ const ServicesDetail = () => {
 	const [post,setPost] = useState([])
 	// console.log(review)
 
-    // console.log(detail)------
-
-
 	//btn--------------
 	const handelPlaceOrder = (event) => {
         event.preventDefault();
@@ -34,7 +31,7 @@ const ServicesDetail = () => {
         }
 		// console.log(order);
 
-        fetch(`http://localhost:5000/review`, {
+        fetch(`https://assignment-11-server-site-beryl.vercel.app/review`, {
             method:"POST",
             headers:{
                 'content-type' : 'application/json'
@@ -53,10 +50,10 @@ const ServicesDetail = () => {
     }
 
 	useEffect(() => {
-		fetch(`http://localhost:5000/reviews`)
+		fetch(`https://assignment-11-server-site-beryl.vercel.app/reviews`)
 		.then(res => res.json())
 		.then(data => {
-			setReview(data)
+			setReview(data.reverse())
 		})
 	},[post])
     
@@ -86,7 +83,7 @@ const ServicesDetail = () => {
 
 		{
 			user?.email ?
-			<div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+			<div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 dark:bg-gray-800 p-8'>
 		{
 			review.map(view => <Review
 			key={view._id}
@@ -96,10 +93,10 @@ const ServicesDetail = () => {
 		}
 		</div>
 		:
-		<></>
-		}
+		<> <p className='text-3xl text-center'>Please Login</p></>
 
-		
+
+		}	
             {
 				user?.email ?
 				<section className="p-10 dark:bg-gray-800 dark:text-gray-50 my-6 ">
@@ -107,8 +104,8 @@ const ServicesDetail = () => {
 		
 		<fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900">
 			<div className="space-y-2 col-span-full lg:col-span-1">
-				<p className="font-medium">Profile</p>
-				<p className="text-xs">Adipisci fuga autem eum!</p>
+				<p className="font-medium">Review</p>
+				<p className="text-xs">Please Fill-Up form</p>
 			</div>
 			<div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
 				<div className="col-span-full sm:col-span-3">
@@ -127,7 +124,7 @@ const ServicesDetail = () => {
 				<div className="col-span-full">
 					
 
-					<input type="submit" value='Place your Order' className="btn btn-info" />
+					<input type="submit" value='Add Review' className="btn btn-info" />
 				</div>
 			</div>
 		</fieldset>
